@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,11 +17,20 @@ import com.example.myapplication.player.Player;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private Player player;
+    private GameView gameView;
+    private Bitmap tile1; // Gras-Textur
+    private Bitmap tile2;  // Wand-Textur
 
     // Dieser Konstruktor wird für XML benötigt
     public GameView(Context context, AttributeSet attrs) {
+
         super(context, attrs);
         init();
+
+        tile1 = BitmapFactory.decodeResource(getResources(), R.drawable.background1); // z. B. Gras
+        tile2 = BitmapFactory.decodeResource(getResources(), R.drawable.background2); // z. B. Sand
+
+
     }
 
     public GameView(Context context) {
@@ -55,9 +66,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         if (canvas != null) {
-            canvas.drawColor(Color.BLACK); // Hintergrundfarbe
-            Paint paint = new Paint();
-            player.draw(canvas, paint); // Spieler zeichnen
+            canvas.drawColor(Color.BLACK);
+            player.draw(canvas, tile1); // Spieler zeichnen
         }
     }
 

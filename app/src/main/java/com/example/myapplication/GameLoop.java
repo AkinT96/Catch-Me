@@ -36,6 +36,7 @@ public class GameLoop extends Thread {
                 synchronized (surfaceHolder) {
                     gameView.update();
                     gameView.draw(canvas);
+
                 }
             } finally {
                 if (canvas != null) {
