@@ -44,8 +44,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         player = new Player(500, 500); // Startposition des Spielers
     }
 
-    public void movePlayer(float dx, float dy) {
-        player.move(dx, dy);
+    public void movePlayer(Double delta) {
+        player.move(delta);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    public void update() {
-        player.update();
+    public void update(Double delta) {
+        player.move(delta);
     }
 }

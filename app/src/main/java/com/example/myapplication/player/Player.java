@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 public class Player {
     private float x, y; // Position des Spielers
@@ -13,9 +14,10 @@ public class Player {
         this.y = y;
     }
 
-    public void move(float dx, float dy) {
-        x += dx * 5; // Bewegung multiplizieren für Geschwindigkeit
-        y += dy * 5;
+    public void move(double delta) {
+        x += (float) (delta * 5); // Bewegung multiplizieren für Geschwindigkeit
+        y += (float) (delta * 5);
+        System.out.println("Methode move genutzt");
     }
 
     public void update() {

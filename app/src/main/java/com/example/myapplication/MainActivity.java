@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
         gameView = findViewById(R.id.gameView);
         TouchPadView touchPad = findViewById(R.id.touchPad);
 
+        Double delta = 0.0;
         // Touchpad-Bewegungen an die GameView weitergeben
-        touchPad.setOnTouchPadListener((dx, dy) -> gameView.movePlayer(dx, dy));
+        touchPad.setOnTouchPadListener((dx, dy) -> gameView.movePlayer(delta));
     }
 }

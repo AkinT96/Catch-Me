@@ -29,13 +29,46 @@ public class GameLoop extends Thread {
 
     @Override
     public void run() {
+
+        long lastFPScheck = System.currentTimeMillis();
+        int fps = 0;
+
+        long lastDelta = System.nanoTime();
+        long nanSec = 1_000_000_000;
+
+
         while (running) {
+
             Canvas canvas = null;
             try {
                 canvas = surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
-                    gameView.update();
+
+                    long now = System.currentTimeMillis();
+                    long nowDelta = System.nanoTime();
+                    double timeSinceLastDelta = nowDelta - lastDelta;
+                    double delta = timeSinceLastDelta / nanSec;
+
+
+
+
+
+                    if(now - lastFPScheck >= 1000) {
+
+                        System.out.println("FPS" + fps + " " + System.currentTimeMillis());
+                        fps = 0;
+                        lastFPScheck += 1000;
+
+                    }
+
+
+
+
+                    gameView.update(delta);
                     gameView.draw(canvas);
+
+                    fps++;
+
 
                 }
             } finally {
