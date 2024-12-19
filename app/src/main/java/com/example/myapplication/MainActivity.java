@@ -7,16 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private GameView gameView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         gameView = findViewById(R.id.gameView);
         TouchPadView touchPad = findViewById(R.id.touchPad);
 
-        Double delta = 0.0;
         // Touchpad-Bewegungen an die GameView weitergeben
-        touchPad.setOnTouchPadListener((dx, dy) -> gameView.movePlayer(delta));
+        touchPad.setOnTouchPadListener((dx, dy) -> gameView.movePlayer(dx, dy, gameView.getGameLoop().getDelta()));
     }
 }

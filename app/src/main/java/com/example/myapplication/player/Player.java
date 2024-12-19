@@ -14,10 +14,38 @@ public class Player {
         this.y = y;
     }
 
-    public void move(double delta) {
-        x += (float) (delta * 5); // Bewegung multiplizieren für Geschwindigkeit
-        y += (float) (delta * 5);
-        System.out.println("Methode move genutzt");
+    public void move(double dx, double dy, int screenWidth, int screenHeight, double delta) {
+        // Neue Position berechnen
+        float newX = (float) (this.x + dx * delta * 10);
+        float newY = (float) (this.y + dy * delta * 10);
+
+        // Begrenzungen für x
+        if (newX < 0) {
+            this.x = 0; // Linker Rand
+        } else if (newX > screenWidth) {
+            this.x = screenWidth; // Rechter Rand
+        } else {
+            this.x = newX; // Innerhalb der Grenzen
+        }
+
+        // Begrenzungen für y
+        if (newY < 0) {
+            this.y = 0; // Oberer Rand
+        } else if (newY > screenHeight) {
+            this.y = screenHeight; // Unterer Rand
+        } else {
+            this.y = newY; // Innerhalb der Grenzen
+        }
+    }
+
+
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
     }
 
     public void update() {
@@ -49,6 +77,10 @@ public class Player {
                 }
             }
         }
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        canvas.drawCircle(this.x,this.y, 30, paint);
 
     }
 }

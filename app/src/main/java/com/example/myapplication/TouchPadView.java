@@ -46,7 +46,7 @@ public class TouchPadView extends View {
                 float dy = touchY - centerY;
 
                 if (listener != null) {
-                    listener.onMove(dx / 100, dy / 100); // Skaliere Bewegungen
+                    listener.onMove(dx / 50, dy / 50); // Skaliere Bewegungen
                 }
                 invalidate();
                 break;

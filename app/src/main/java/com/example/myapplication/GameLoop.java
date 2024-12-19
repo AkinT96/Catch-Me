@@ -7,6 +7,7 @@ public class GameLoop extends Thread {
     private SurfaceHolder surfaceHolder;
     private GameView gameView;
     private boolean running;
+    private double deltaTime;
 
     public GameLoop(SurfaceHolder surfaceHolder, GameView gameView) {
         this.surfaceHolder = surfaceHolder;
@@ -26,6 +27,13 @@ public class GameLoop extends Thread {
             e.printStackTrace();
         }
     }
+    public double getDelta() {
+        return deltaTime; // Falls du deltaTime berechnest und speicherst
+    }
+
+
+
+
 
     @Override
     public void run() {
@@ -47,7 +55,7 @@ public class GameLoop extends Thread {
                     long now = System.currentTimeMillis();
                     long nowDelta = System.nanoTime();
                     double timeSinceLastDelta = nowDelta - lastDelta;
-                    double delta = timeSinceLastDelta / nanSec;
+                    deltaTime = timeSinceLastDelta / nanSec;
 
 
 
@@ -55,7 +63,7 @@ public class GameLoop extends Thread {
 
                     if(now - lastFPScheck >= 1000) {
 
-                        System.out.println("FPS" + fps + " " + System.currentTimeMillis());
+                        System.out.println("FPS" + fps);
                         fps = 0;
                         lastFPScheck += 1000;
 
@@ -64,7 +72,7 @@ public class GameLoop extends Thread {
 
 
 
-                    gameView.update(delta);
+                    gameView.update(deltaTime);
                     gameView.draw(canvas);
 
                     fps++;
